@@ -1,0 +1,1499 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"name":"spin-sa","namespace":"spinnaker"}}
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:secrets:
+          .: {}
+          k:{"name":"spin-sa-token-xxgjp"}:
+            .: {}
+            f:name: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    name: spin-sa
+    namespace: spinnaker
+    resourceVersion: "1818367"
+    selfLink: /api/v1/namespaces/spinnaker/serviceaccounts/spin-sa
+    uid: a8d67819-8006-47aa-929a-ba4bc3c57f11
+  secrets:
+  - name: spin-sa-token-xxgjp
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRole
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"name":"spin-cluster-role"},"rules":[{"apiGroups":["extensions"],"resources":["ingresses","ingresses/status"],"verbs":["get","list","watch","create","update","patch","delete"]},{"apiGroups":["networking.k8s.io"],"resources":["ingresses","ingresses/status"],"verbs":["get","list","watch","create","update","patch","delete"]},{"apiGroups":[""],"resources":["pods","endpoints"],"verbs":["get","list","watch","create","update","patch","delete"]},{"apiGroups":[""],"resources":["services","services/finalizers","events","configmaps","secrets","namespaces","jobs"],"verbs":["create","get","list","update","watch","patch","delete"]},{"apiGroups":["batch"],"resources":["jobs"],"verbs":["create","get","list","update","watch","patch"]},{"apiGroups":["apps","extensions"],"resources":["deployments","deployments/finalizers","deployments/scale","daemonsets","replicasets","statefulsets"],"verbs":["create","get","list","update","watch","patch","delete"]},{"apiGroups":["monitoring.coreos.com"],"resources":["servicemonitors"],"verbs":["get","create"]},{"apiGroups":["spinnaker.armory.io"],"resources":["*","spinnakerservices"],"verbs":["create","get","list","update","watch","patch"]},{"apiGroups":["admissionregistration.k8s.io"],"resources":["validatingwebhookconfigurations"],"verbs":["*"]}]}
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    managedFields:
+    - apiVersion: rbac.authorization.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:rules: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    name: spin-cluster-role
+    resourceVersion: "1818362"
+    selfLink: /apis/rbac.authorization.k8s.io/v1/clusterroles/spin-cluster-role
+    uid: 9422f72d-d0ff-4973-900b-d9a3b7efd0fd
+  rules:
+  - apiGroups:
+    - extensions
+    resources:
+    - ingresses
+    - ingresses/status
+    verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - patch
+    - delete
+  - apiGroups:
+    - networking.k8s.io
+    resources:
+    - ingresses
+    - ingresses/status
+    verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - patch
+    - delete
+  - apiGroups:
+    - ""
+    resources:
+    - pods
+    - endpoints
+    verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - patch
+    - delete
+  - apiGroups:
+    - ""
+    resources:
+    - services
+    - services/finalizers
+    - events
+    - configmaps
+    - secrets
+    - namespaces
+    - jobs
+    verbs:
+    - create
+    - get
+    - list
+    - update
+    - watch
+    - patch
+    - delete
+  - apiGroups:
+    - batch
+    resources:
+    - jobs
+    verbs:
+    - create
+    - get
+    - list
+    - update
+    - watch
+    - patch
+  - apiGroups:
+    - apps
+    - extensions
+    resources:
+    - deployments
+    - deployments/finalizers
+    - deployments/scale
+    - daemonsets
+    - replicasets
+    - statefulsets
+    verbs:
+    - create
+    - get
+    - list
+    - update
+    - watch
+    - patch
+    - delete
+  - apiGroups:
+    - monitoring.coreos.com
+    resources:
+    - servicemonitors
+    verbs:
+    - get
+    - create
+  - apiGroups:
+    - spinnaker.armory.io
+    resources:
+    - '*'
+    - spinnakerservices
+    verbs:
+    - create
+    - get
+    - list
+    - update
+    - watch
+    - patch
+  - apiGroups:
+    - admissionregistration.k8s.io
+    resources:
+    - validatingwebhookconfigurations
+    verbs:
+    - '*'
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"spin-cluster-role-binding"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"spin-cluster-role"},"subjects":[{"kind":"ServiceAccount","name":"spin-sa","namespace":"spinnaker"}]}
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    managedFields:
+    - apiVersion: rbac.authorization.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:roleRef:
+          f:apiGroup: {}
+          f:kind: {}
+          f:name: {}
+        f:subjects: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    name: spin-cluster-role-binding
+    resourceVersion: "1818363"
+    selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/spin-cluster-role-binding
+    uid: e1e15325-2e18-4c31-97ff-b9e81a58467b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: spin-cluster-role
+  subjects:
+  - kind: ServiceAccount
+    name: spin-sa
+    namespace: spinnaker
+- apiVersion: v1
+  data:
+    mysqld.cnf: |
+      # The MySQL  Server configuration file.
+      [mysqld]
+      pid-file        = /var/run/mysqld/mysqld.pid
+      socket          = /var/run/mysqld/mysqld.sock
+      datadir         = /var/lib/mysql
+      #log-error      = /var/log/mysql/error.log
+      # Accept all incoming connections
+      bind-address    = 0.0.0.0
+      # Disabling symbolic-links is recommended to prevent assorted security risks
+      symbolic-links=0
+      max_allowed_packet=500M
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"mysqld.cnf":"# The MySQL  Server configuration file.\n[mysqld]\npid-file        = /var/run/mysqld/mysqld.pid\nsocket          = /var/run/mysqld/mysqld.sock\ndatadir         = /var/lib/mysql\n#log-error      = /var/log/mysql/error.log\n# Accept all incoming connections\nbind-address    = 0.0.0.0\n# Disabling symbolic-links is recommended to prevent assorted security risks\nsymbolic-links=0\nmax_allowed_packet=500M\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"mysql-config","namespace":"spinnaker"}}
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:mysqld.cnf: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    name: mysql-config
+    namespace: spinnaker
+    resourceVersion: "1818364"
+    selfLink: /api/v1/namespaces/spinnaker/configmaps/mysql-config
+    uid: c3c60529-8e4e-4716-9e13-7e855b723fbd
+- apiVersion: v1
+  data:
+    clouddriver.sh: |
+      #!/bin/bash -xe
+      echo "Creating Clouddriver DB..."
+      mysql -u root -p${MYSQL_ROOT_PASSWORD} -e \
+        "CREATE SCHEMA IF NOT EXISTS clouddriver DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; \
+        CREATE USER IF NOT EXISTS 'clouddriver_service'@'%' IDENTIFIED BY '${MYSQL_CD_PASSWORD}'; \
+        CREATE USER IF NOT EXISTS 'clouddriver_migrate'@'%' IDENTIFIED BY '${MYSQL_CD_MIGRATE_PASSWORD}'; \
+        GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, EXECUTE, SHOW VIEW ON clouddriver.* TO 'clouddriver_service'@'%'; \
+        GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, LOCK TABLES, EXECUTE, SHOW VIEW ON clouddriver.* TO clouddriver_migrate@'%'; \
+        CREATE SCHEMA IF NOT EXISTS orca DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; \
+        CREATE USER IF NOT EXISTS 'orca_service'@'%' IDENTIFIED BY '${MYSQL_ORCA_PASSWORD}'; \
+        CREATE USER IF NOT EXISTS 'orca_migrate'@'%' IDENTIFIED BY '${MYSQL_ORCA_MIGRATE_PASSWORD}'; \
+        GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, EXECUTE, SHOW VIEW ON orca.* TO 'orca_service'@'%'; \
+        GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, LOCK TABLES, EXECUTE, SHOW VIEW ON orca.* TO orca_migrate@'%'; \
+        CREATE SCHEMA IF NOT EXISTS front50 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; \
+        CREATE USER IF NOT EXISTS 'front50_service'@'%' IDENTIFIED BY '${MYSQL_F50_PASSWORD}'; \
+        CREATE USER IF NOT EXISTS 'front50_migrate'@'%' IDENTIFIED BY '${MYSQL_F50_MIGRATE_PASSWORD}'; \
+        GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, EXECUTE, SHOW VIEW ON front50.* TO 'front50_service'@'%'; \
+        GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, LOCK TABLES, EXECUTE, SHOW VIEW ON front50.* TO front50_migrate@'%';"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"clouddriver.sh":"#!/bin/bash -xe\necho \"Creating Clouddriver DB...\"\nmysql -u root -p${MYSQL_ROOT_PASSWORD} -e \\\n  \"CREATE SCHEMA IF NOT EXISTS clouddriver DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; \\\n  CREATE USER IF NOT EXISTS 'clouddriver_service'@'%' IDENTIFIED BY '${MYSQL_CD_PASSWORD}'; \\\n  CREATE USER IF NOT EXISTS 'clouddriver_migrate'@'%' IDENTIFIED BY '${MYSQL_CD_MIGRATE_PASSWORD}'; \\\n  GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, EXECUTE, SHOW VIEW ON clouddriver.* TO 'clouddriver_service'@'%'; \\\n  GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, LOCK TABLES, EXECUTE, SHOW VIEW ON clouddriver.* TO clouddriver_migrate@'%'; \\\n  CREATE SCHEMA IF NOT EXISTS orca DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; \\\n  CREATE USER IF NOT EXISTS 'orca_service'@'%' IDENTIFIED BY '${MYSQL_ORCA_PASSWORD}'; \\\n  CREATE USER IF NOT EXISTS 'orca_migrate'@'%' IDENTIFIED BY '${MYSQL_ORCA_MIGRATE_PASSWORD}'; \\\n  GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, EXECUTE, SHOW VIEW ON orca.* TO 'orca_service'@'%'; \\\n  GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, LOCK TABLES, EXECUTE, SHOW VIEW ON orca.* TO orca_migrate@'%'; \\\n  CREATE SCHEMA IF NOT EXISTS front50 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; \\\n  CREATE USER IF NOT EXISTS 'front50_service'@'%' IDENTIFIED BY '${MYSQL_F50_PASSWORD}'; \\\n  CREATE USER IF NOT EXISTS 'front50_migrate'@'%' IDENTIFIED BY '${MYSQL_F50_MIGRATE_PASSWORD}'; \\\n  GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, EXECUTE, SHOW VIEW ON front50.* TO 'front50_service'@'%'; \\\n  GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, LOCK TABLES, EXECUTE, SHOW VIEW ON front50.* TO front50_migrate@'%';\"\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"mysql-init-db","namespace":"spinnaker"}}
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:clouddriver.sh: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    name: mysql-init-db
+    namespace: spinnaker
+    resourceVersion: "1818366"
+    selfLink: /api/v1/namespaces/spinnaker/configmaps/mysql-init-db
+    uid: ca839e1e-0ae0-42bd-9b6c-94d9d0cb152e
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"minio","namespace":"spinnaker"},"spec":{"ports":[{"port":9000,"protocol":"TCP","targetPort":9000}],"selector":{"app":"minio"}}}
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          f:ports:
+            .: {}
+            k:{"port":9000,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:app: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    name: minio
+    namespace: spinnaker
+    resourceVersion: "1818370"
+    selfLink: /api/v1/namespaces/spinnaker/services/minio
+    uid: 523db56e-437c-4e06-a804-3d06df91eed3
+  spec:
+    clusterIP: 172.20.13.221
+    ports:
+    - port: 9000
+      protocol: TCP
+      targetPort: 9000
+    selector:
+      app: minio
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"mysql","namespace":"spinnaker"},"spec":{"ports":[{"port":3306}],"selector":{"app":"mysql"},"type":"ClusterIP"}}
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          f:ports:
+            .: {}
+            k:{"port":3306,"protocol":"TCP"}:
+              .: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:app: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    name: mysql
+    namespace: spinnaker
+    resourceVersion: "1818375"
+    selfLink: /api/v1/namespaces/spinnaker/services/mysql
+    uid: acaa5938-88ad-4fbe-8fe0-d8e2d59f7064
+  spec:
+    clusterIP: 172.20.148.121
+    ports:
+    - port: 3306
+      protocol: TCP
+      targetPort: 3306
+    selector:
+      app: mysql
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"name":"minio","namespace":"spinnaker"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"minio"}},"serviceName":"minio","template":{"metadata":{"labels":{"app":"minio"}},"spec":{"containers":[{"command":["/bin/sh","-c","mkdir -p /storage/spinnaker \u0026\u0026 /usr/bin/minio server /storage"],"env":[{"name":"MINIO_ACCESS_KEY","value":"minio"},{"name":"MINIO_SECRET_KEY","valueFrom":{"secretKeyRef":{"key":"minioAccessKey","name":"spin-secrets"}}}],"image":"minio/minio","name":"minio","ports":[{"containerPort":9000}],"volumeMounts":[{"mountPath":"/storage","name":"storage"}]}],"securityContext":{"fsGroup":65535,"runAsGroup":65535,"runAsUser":1000},"volumes":[{"name":"storage","persistentVolumeClaim":{"claimName":"minio-pvc"}}]}}}}
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    generation: 1
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          f:podManagementPolicy: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector:
+            f:matchLabels:
+              .: {}
+              f:app: {}
+          f:serviceName: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:app: {}
+            f:spec:
+              f:containers:
+                k:{"name":"minio"}:
+                  .: {}
+                  f:command: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"MINIO_ACCESS_KEY"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"MINIO_SECRET_KEY"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef:
+                          .: {}
+                          f:key: {}
+                          f:name: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":9000,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/storage"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:fsGroup: {}
+                f:runAsGroup: {}
+                f:runAsUser: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"storage"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+          f:updateStrategy:
+            f:rollingUpdate:
+              .: {}
+              f:partition: {}
+            f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:collisionCount: {}
+          f:currentReplicas: {}
+          f:currentRevision: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updateRevision: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-06-08T23:11:56Z"
+    name: minio
+    namespace: spinnaker
+    resourceVersion: "1819081"
+    selfLink: /apis/apps/v1/namespaces/spinnaker/statefulsets/minio
+    uid: 91a1fae9-bee3-4b1b-a118-d17ba794aae3
+  spec:
+    podManagementPolicy: OrderedReady
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: minio
+    serviceName: minio
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: minio
+      spec:
+        containers:
+        - command:
+          - /bin/sh
+          - -c
+          - mkdir -p /storage/spinnaker && /usr/bin/minio server /storage
+          env:
+          - name: MINIO_ACCESS_KEY
+            value: minio
+          - name: MINIO_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                key: minioAccessKey
+                name: spin-secrets
+          image: minio/minio
+          imagePullPolicy: Always
+          name: minio
+          ports:
+          - containerPort: 9000
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /storage
+            name: storage
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          fsGroup: 65535
+          runAsGroup: 65535
+          runAsUser: 1000
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: minio-pvc
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate
+  status:
+    collisionCount: 0
+    currentReplicas: 1
+    currentRevision: minio-79bf9dd46
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updateRevision: minio-79bf9dd46
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"name":"mysql","namespace":"spinnaker"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"mysql"}},"serviceName":"mysql","template":{"metadata":{"labels":{"app":"mysql"}},"spec":{"containers":[{"args":["--ignore-db-dir=lost+found"],"env":[{"name":"MYSQL_ROOT_PASSWORD","valueFrom":{"secretKeyRef":{"key":"mysqlRootPassword","name":"spin-secrets"}}},{"name":"MYSQL_CD_PASSWORD","valueFrom":{"secretKeyRef":{"key":"mysqlCdPassword","name":"spin-secrets"}}},{"name":"MYSQL_CD_MIGRATE_PASSWORD","valueFrom":{"secretKeyRef":{"key":"mysqlCdMigratePassword","name":"spin-secrets"}}},{"name":"MYSQL_ORCA_PASSWORD","valueFrom":{"secretKeyRef":{"key":"mysqlOrcaPassword","name":"spin-secrets"}}},{"name":"MYSQL_ORCA_MIGRATE_PASSWORD","valueFrom":{"secretKeyRef":{"key":"mysqlOrcaMigratePassword","name":"spin-secrets"}}},{"name":"MYSQL_F50_PASSWORD","valueFrom":{"secretKeyRef":{"key":"mysqlF50Password","name":"spin-secrets"}}},{"name":"MYSQL_F50_MIGRATE_PASSWORD","valueFrom":{"secretKeyRef":{"key":"mysqlF50MigratePassword","name":"spin-secrets"}}}],"image":"mysql:5.7","name":"mysql","ports":[{"containerPort":3306,"name":"mysql"}],"resources":{"requests":{"cpu":"500m","memory":"1Gi"}},"volumeMounts":[{"mountPath":"/var/lib/mysql","name":"mysql-persistent-storage"},{"mountPath":"/docker-entrypoint-initdb.d","name":"init-db"},{"mountPath":"/etc/mysql/mysql.conf.d","name":"mysql-config"}]}],"volumes":[{"name":"mysql-persistent-storage","persistentVolumeClaim":{"claimName":"mysql-pvc"}},{"configMap":{"name":"mysql-init-db"},"name":"init-db"},{"configMap":{"name":"mysql-config"},"name":"mysql-config"}]}}}}
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    generation: 1
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          f:podManagementPolicy: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector:
+            f:matchLabels:
+              .: {}
+              f:app: {}
+          f:serviceName: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:app: {}
+            f:spec:
+              f:containers:
+                k:{"name":"mysql"}:
+                  .: {}
+                  f:args: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"MYSQL_CD_MIGRATE_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef:
+                          .: {}
+                          f:key: {}
+                          f:name: {}
+                    k:{"name":"MYSQL_CD_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef:
+                          .: {}
+                          f:key: {}
+                          f:name: {}
+                    k:{"name":"MYSQL_F50_MIGRATE_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef:
+                          .: {}
+                          f:key: {}
+                          f:name: {}
+                    k:{"name":"MYSQL_F50_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef:
+                          .: {}
+                          f:key: {}
+                          f:name: {}
+                    k:{"name":"MYSQL_ORCA_MIGRATE_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef:
+                          .: {}
+                          f:key: {}
+                          f:name: {}
+                    k:{"name":"MYSQL_ORCA_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef:
+                          .: {}
+                          f:key: {}
+                          f:name: {}
+                    k:{"name":"MYSQL_ROOT_PASSWORD"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef:
+                          .: {}
+                          f:key: {}
+                          f:name: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":3306,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources:
+                    .: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/docker-entrypoint-initdb.d"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/etc/mysql/mysql.conf.d"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/lib/mysql"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"init-db"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"mysql-config"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"mysql-persistent-storage"}:
+                  .: {}
+                  f:name: {}
+                  f:persistentVolumeClaim:
+                    .: {}
+                    f:claimName: {}
+          f:updateStrategy:
+            f:rollingUpdate:
+              .: {}
+              f:partition: {}
+            f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:collisionCount: {}
+          f:currentReplicas: {}
+          f:currentRevision: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updateRevision: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-06-08T23:11:42Z"
+    name: mysql
+    namespace: spinnaker
+    resourceVersion: "1818801"
+    selfLink: /apis/apps/v1/namespaces/spinnaker/statefulsets/mysql
+    uid: 7b0f6586-eee4-4015-9966-d21a0c99b710
+  spec:
+    podManagementPolicy: OrderedReady
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: mysql
+    serviceName: mysql
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: mysql
+      spec:
+        containers:
+        - args:
+          - --ignore-db-dir=lost+found
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: mysqlRootPassword
+                name: spin-secrets
+          - name: MYSQL_CD_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: mysqlCdPassword
+                name: spin-secrets
+          - name: MYSQL_CD_MIGRATE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: mysqlCdMigratePassword
+                name: spin-secrets
+          - name: MYSQL_ORCA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: mysqlOrcaPassword
+                name: spin-secrets
+          - name: MYSQL_ORCA_MIGRATE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: mysqlOrcaMigratePassword
+                name: spin-secrets
+          - name: MYSQL_F50_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: mysqlF50Password
+                name: spin-secrets
+          - name: MYSQL_F50_MIGRATE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: mysqlF50MigratePassword
+                name: spin-secrets
+          image: mysql:5.7
+          imagePullPolicy: IfNotPresent
+          name: mysql
+          ports:
+          - containerPort: 3306
+            name: mysql
+            protocol: TCP
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: mysql-persistent-storage
+          - mountPath: /docker-entrypoint-initdb.d
+            name: init-db
+          - mountPath: /etc/mysql/mysql.conf.d
+            name: mysql-config
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+        - configMap:
+            defaultMode: 420
+            name: mysql-init-db
+          name: init-db
+        - configMap:
+            defaultMode: 420
+            name: mysql-config
+          name: mysql-config
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate
+  status:
+    collisionCount: 0
+    currentReplicas: 1
+    currentRevision: mysql-68858576d8
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updateRevision: mysql-68858576d8
+    updatedReplicas: 1
+- apiVersion: spinnaker.armory.io/v1alpha2
+  kind: SpinnakerService
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"spinnaker.armory.io/v1alpha2","kind":"SpinnakerService","metadata":{"annotations":{},"name":"spinnaker","namespace":"spinnaker"},"spec":{"expose":{"service":{"overrides":{"deck":{"publicPort":9000},"gate":{"publicPort":8084}},"type":"LoadBalancer"},"type":"service"},"kustomize":{"clouddriver":{},"deck":{},"echo":{},"front50":{},"gate":{},"igor":{},"orca":{},"rosco":{}},"spinnakerConfig":{"config":{"artifacts":{},"canary":{},"ci":{},"deploymentEnvironment":{},"features":{"artifacts":true},"metricStores":{},"notifications":{},"persistentStorage":{"persistentStoreType":"s3","s3":{"accessKeyId":"minio","bucket":"spinnaker","endpoint":"http://minio:9000","pathStyleAccess":true,"region":"us-west-2","rootFolder":"front50","secretAccessKey":"encrypted:k8s!n:spin-secrets!k:minioAccessKey"}},"providers":{"kubernetes":{"accounts":[{"cacheThreads":1,"cachingPolicies":[],"checkPermissionsOnStartup":true,"customResources":[],"dockerRegistries":[],"kinds":[],"liveManifestCalls":false,"name":"spinnaker","namespaces":[],"oAuthScopes":[],"omitKinds":[],"omitNamespaces":[],"onlySpinnakerManaged":false,"permissions":{},"providerVersion":"V2","serviceAccount":true}],"enabled":true,"primaryAccount":"spinnaker"}},"pubsub":{},"repository":{},"security":{},"spinnaker":{},"timezone":"America/New_York","version":"2.26.0"},"profiles":{"clouddriver":{"dualTaskRepository":{"enabled":false,"previousClass":"com.netflix.spinnaker.clouddriver.data.task.jedis.RedisTaskRepository","primaryClass":"com.netflix.spinnaker.clouddriver.sql.SqlTaskRepository"},"redis":{"cache":{"enabled":false},"enabled":true,"scheduler":{"enabled":true},"taskRepository":{"enabled":false}},"sql":{"cache":{"enabled":true,"readBatchSize":500,"writeBatchSize":300},"connectionPools":{"default":{"default":true,"jdbcUrl":"jdbc:mysql://mysql:3306/clouddriver?useSSL=false\u0026useUnicode=true\u0026characterEncoding=utf8\u0026connectionCollation=utf8mb4_unicode_ci","password":"encrypted:k8s!n:spin-secrets!k:mysqlCdPassword","user":"clouddriver_service"},"tasks":{"jdbcUrl":"jdbc:mysql://mysql:3306/clouddriver?useSSL=false\u0026useUnicode=true\u0026characterEncoding=utf8\u0026connectionCollation=utf8mb4_unicode_ci","password":"encrypted:k8s!n:spin-secrets!k:mysqlCdPassword","user":"clouddriver_service"}},"enabled":true,"migration":{"jdbcUrl":"jdbc:mysql://mysql:3306/clouddriver?useSSL=false\u0026useUnicode=true\u0026characterEncoding=utf8\u0026connectionCollation=utf8mb4_unicode_ci","password":"encrypted:k8s!n:spin-secrets!k:mysqlCdMigratePassword","user":"clouddriver_migrate"},"scheduler":{"enabled":false},"taskRepository":{"enabled":true}}},"deck":{"settings-local.js":"// window.spinnakerSettings.feature.terraform = true; // Terraform UI armory/patch-terraformer.yml\n// window.spinnakerSettings.feature.functions = true  // AWS Lambda accounts/aws/patch-aws-lambda-plugin.yml\n// window.spinnakerSettings.authEnabled = true; // Basic Authentication security/patch-basic-auth.yml\n// window.spinnakerSettings.notifications.email = window.spinnakerSettings.notifications.email || {};\n// window.spinnakerSettings.notifications.email.enabled = true;\n// window.spinnakerSettings.feature.managedServiceAccounts = true;\nwindow.spinnakerSettings.kubernetesAdHocInfraWritesEnabled = true;\n"},"echo":{},"front50":{"spinnaker":{"s3":{"enabled":false}},"sql":{"connectionPools":{"default":{"default":true,"jdbcUrl":"jdbc:mysql://mysql:3306/front50?useSSL=false\u0026useUnicode=true\u0026characterEncoding=utf8","password":"encrypted:k8s!n:spin-secrets!k:mysqlF50Password","user":"front50_service"}},"enabled":true,"migration":{"jdbcUrl":"jdbc:mysql://mysql:3306/front50?useSSL=false\u0026useUnicode=true\u0026characterEncoding=utf8","password":"encrypted:k8s!n:spin-secrets!k:mysqlF50MigratePassword","user":"front50_migrate"}}},"gate":{},"igor":{},"orca":{"executionRepository":{"redis":{"enabled":false},"sql":{"enabled":true}},"monitor":{"activeExecutions":{"redis":false}},"sql":{"connectionPool":{"connectionTimeout":5000,"jdbcUrl":"jdbc:mysql://mysql:3306/orca?useSSL=false\u0026useUnicode=true\u0026characterEncoding=utf8","maxLifetime":30000,"maxPoolSize":50,"password":"encrypted:k8s!n:spin-secrets!k:mysqlOrcaPassword","user":"orca_service"},"enabled":true,"migration":{"jdbcUrl":"jdbc:mysql://mysql:3306/orca?useSSL=false\u0026useUnicode=true\u0026characterEncoding=utf8","password":"encrypted:k8s!n:spin-secrets!k:mysqlOrcaMigratePassword","user":"orca_migrate"}}},"rosco":{},"settings-local.js":{},"spinnaker":{},"spinnakerconfig":{}},"service-settings":{"clouddriver":{"kubernetes":{"serviceAccountName":"spin-sa"}},"echo":{},"front50":{},"gate":{},"igor":{},"orca":{},"rosco":{},"spinnaker":{}}},"validation":{"providers":{"kubernetes":{"enabled":true}}}}}
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    generation: 1
+    managedFields:
+    - apiVersion: spinnaker.armory.io/v1alpha2
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          .: {}
+          f:expose:
+            .: {}
+            f:service:
+              .: {}
+              f:overrides:
+                .: {}
+                f:deck:
+                  .: {}
+                  f:publicPort: {}
+                f:gate:
+                  .: {}
+                  f:publicPort: {}
+              f:type: {}
+            f:type: {}
+          f:kustomize:
+            .: {}
+            f:clouddriver: {}
+            f:deck: {}
+            f:echo: {}
+            f:front50: {}
+            f:gate: {}
+            f:igor: {}
+            f:orca: {}
+            f:rosco: {}
+          f:spinnakerConfig:
+            .: {}
+            f:config:
+              .: {}
+              f:artifacts: {}
+              f:canary: {}
+              f:ci: {}
+              f:deploymentEnvironment: {}
+              f:features:
+                .: {}
+                f:artifacts: {}
+              f:metricStores: {}
+              f:notifications: {}
+              f:persistentStorage:
+                .: {}
+                f:persistentStoreType: {}
+                f:s3:
+                  .: {}
+                  f:accessKeyId: {}
+                  f:bucket: {}
+                  f:endpoint: {}
+                  f:pathStyleAccess: {}
+                  f:region: {}
+                  f:rootFolder: {}
+                  f:secretAccessKey: {}
+              f:providers:
+                .: {}
+                f:kubernetes:
+                  .: {}
+                  f:accounts: {}
+                  f:enabled: {}
+                  f:primaryAccount: {}
+              f:pubsub: {}
+              f:repository: {}
+              f:security: {}
+              f:spinnaker: {}
+              f:timezone: {}
+              f:version: {}
+            f:profiles:
+              .: {}
+              f:clouddriver:
+                .: {}
+                f:dualTaskRepository:
+                  .: {}
+                  f:enabled: {}
+                  f:previousClass: {}
+                  f:primaryClass: {}
+                f:redis:
+                  .: {}
+                  f:cache:
+                    .: {}
+                    f:enabled: {}
+                  f:enabled: {}
+                  f:scheduler:
+                    .: {}
+                    f:enabled: {}
+                  f:taskRepository:
+                    .: {}
+                    f:enabled: {}
+                f:sql:
+                  .: {}
+                  f:cache:
+                    .: {}
+                    f:enabled: {}
+                    f:readBatchSize: {}
+                    f:writeBatchSize: {}
+                  f:connectionPools:
+                    .: {}
+                    f:default:
+                      .: {}
+                      f:default: {}
+                      f:jdbcUrl: {}
+                      f:password: {}
+                      f:user: {}
+                    f:tasks:
+                      .: {}
+                      f:jdbcUrl: {}
+                      f:password: {}
+                      f:user: {}
+                  f:enabled: {}
+                  f:migration:
+                    .: {}
+                    f:jdbcUrl: {}
+                    f:password: {}
+                    f:user: {}
+                  f:scheduler:
+                    .: {}
+                    f:enabled: {}
+                  f:taskRepository:
+                    .: {}
+                    f:enabled: {}
+              f:deck:
+                .: {}
+                f:settings-local.js: {}
+              f:echo: {}
+              f:front50:
+                .: {}
+                f:spinnaker:
+                  .: {}
+                  f:s3:
+                    .: {}
+                    f:enabled: {}
+                f:sql:
+                  .: {}
+                  f:connectionPools:
+                    .: {}
+                    f:default:
+                      .: {}
+                      f:default: {}
+                      f:jdbcUrl: {}
+                      f:password: {}
+                      f:user: {}
+                  f:enabled: {}
+                  f:migration:
+                    .: {}
+                    f:jdbcUrl: {}
+                    f:password: {}
+                    f:user: {}
+              f:gate: {}
+              f:igor: {}
+              f:orca:
+                .: {}
+                f:executionRepository:
+                  .: {}
+                  f:redis:
+                    .: {}
+                    f:enabled: {}
+                  f:sql:
+                    .: {}
+                    f:enabled: {}
+                f:monitor:
+                  .: {}
+                  f:activeExecutions:
+                    .: {}
+                    f:redis: {}
+                f:sql:
+                  .: {}
+                  f:connectionPool:
+                    .: {}
+                    f:connectionTimeout: {}
+                    f:jdbcUrl: {}
+                    f:maxLifetime: {}
+                    f:maxPoolSize: {}
+                    f:password: {}
+                    f:user: {}
+                  f:enabled: {}
+                  f:migration:
+                    .: {}
+                    f:jdbcUrl: {}
+                    f:password: {}
+                    f:user: {}
+              f:rosco: {}
+              f:settings-local.js: {}
+              f:spinnaker: {}
+              f:spinnakerconfig: {}
+            f:service-settings:
+              .: {}
+              f:clouddriver:
+                .: {}
+                f:kubernetes:
+                  .: {}
+                  f:serviceAccountName: {}
+              f:echo: {}
+              f:front50: {}
+              f:gate: {}
+              f:igor: {}
+              f:orca: {}
+              f:rosco: {}
+              f:spinnaker: {}
+          f:validation:
+            .: {}
+            f:providers:
+              .: {}
+              f:kubernetes:
+                .: {}
+                f:enabled: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    - apiVersion: spinnaker.armory.io/v1alpha2
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:accounts: {}
+          f:networkPolicy: {}
+          f:validation:
+            f:failFast: {}
+            f:frequencySeconds: {}
+            f:providers:
+              f:kubernetes:
+                f:frequencySeconds: {}
+        f:status:
+          .: {}
+          f:apiUrl: {}
+          f:lastDeployed:
+            .: {}
+            f:config:
+              .: {}
+              f:hash: {}
+              f:lastUpdatedAt: {}
+            f:kustomize:
+              .: {}
+              f:hash: {}
+              f:lastUpdatedAt: {}
+          f:serviceCount: {}
+          f:services: {}
+          f:status: {}
+          f:uiUrl: {}
+          f:version: {}
+      manager: spinnaker-operator
+      operation: Update
+      time: "2021-06-08T23:11:43Z"
+    name: spinnaker
+    namespace: spinnaker
+    resourceVersion: "1929275"
+    selfLink: /apis/spinnaker.armory.io/v1alpha2/namespaces/spinnaker/spinnakerservices/spinnaker
+    uid: 6aa3881e-7711-47c1-8c10-050e2fc13d2e
+  spec:
+    expose:
+      service:
+        overrides:
+          deck:
+            publicPort: 9000
+          gate:
+            publicPort: 8084
+        type: LoadBalancer
+      type: service
+    kustomize:
+      clouddriver: {}
+      deck: {}
+      echo: {}
+      front50: {}
+      gate: {}
+      igor: {}
+      orca: {}
+      rosco: {}
+    spinnakerConfig:
+      config:
+        artifacts: {}
+        canary: {}
+        ci: {}
+        deploymentEnvironment: {}
+        features:
+          artifacts: true
+        metricStores: {}
+        notifications: {}
+        persistentStorage:
+          persistentStoreType: s3
+          s3:
+            accessKeyId: minio
+            bucket: spinnaker
+            endpoint: http://minio:9000
+            pathStyleAccess: true
+            region: us-west-2
+            rootFolder: front50
+            secretAccessKey: encrypted:k8s!n:spin-secrets!k:minioAccessKey
+        providers:
+          kubernetes:
+            accounts:
+            - cacheThreads: 1
+              cachingPolicies: []
+              checkPermissionsOnStartup: true
+              customResources: []
+              dockerRegistries: []
+              kinds: []
+              liveManifestCalls: false
+              name: spinnaker
+              namespaces: []
+              oAuthScopes: []
+              omitKinds: []
+              omitNamespaces: []
+              onlySpinnakerManaged: false
+              permissions: {}
+              providerVersion: V2
+              serviceAccount: true
+            enabled: true
+            primaryAccount: spinnaker
+        pubsub: {}
+        repository: {}
+        security: {}
+        spinnaker: {}
+        timezone: America/New_York
+        version: 2.26.0
+      profiles:
+        clouddriver:
+          dualTaskRepository:
+            enabled: false
+            previousClass: com.netflix.spinnaker.clouddriver.data.task.jedis.RedisTaskRepository
+            primaryClass: com.netflix.spinnaker.clouddriver.sql.SqlTaskRepository
+          redis:
+            cache:
+              enabled: false
+            enabled: true
+            scheduler:
+              enabled: true
+            taskRepository:
+              enabled: false
+          sql:
+            cache:
+              enabled: true
+              readBatchSize: 500
+              writeBatchSize: 300
+            connectionPools:
+              default:
+                default: true
+                jdbcUrl: jdbc:mysql://mysql:3306/clouddriver?useSSL=false&useUnicode=true&characterEncoding=utf8&connectionCollation=utf8mb4_unicode_ci
+                password: encrypted:k8s!n:spin-secrets!k:mysqlCdPassword
+                user: clouddriver_service
+              tasks:
+                jdbcUrl: jdbc:mysql://mysql:3306/clouddriver?useSSL=false&useUnicode=true&characterEncoding=utf8&connectionCollation=utf8mb4_unicode_ci
+                password: encrypted:k8s!n:spin-secrets!k:mysqlCdPassword
+                user: clouddriver_service
+            enabled: true
+            migration:
+              jdbcUrl: jdbc:mysql://mysql:3306/clouddriver?useSSL=false&useUnicode=true&characterEncoding=utf8&connectionCollation=utf8mb4_unicode_ci
+              password: encrypted:k8s!n:spin-secrets!k:mysqlCdMigratePassword
+              user: clouddriver_migrate
+            scheduler:
+              enabled: false
+            taskRepository:
+              enabled: true
+        deck:
+          settings-local.js: |
+            // window.spinnakerSettings.feature.terraform = true; // Terraform UI armory/patch-terraformer.yml
+            // window.spinnakerSettings.feature.functions = true  // AWS Lambda accounts/aws/patch-aws-lambda-plugin.yml
+            // window.spinnakerSettings.authEnabled = true; // Basic Authentication security/patch-basic-auth.yml
+            // window.spinnakerSettings.notifications.email = window.spinnakerSettings.notifications.email || {};
+            // window.spinnakerSettings.notifications.email.enabled = true;
+            // window.spinnakerSettings.feature.managedServiceAccounts = true;
+            window.spinnakerSettings.kubernetesAdHocInfraWritesEnabled = true;
+        echo: {}
+        front50:
+          spinnaker:
+            s3:
+              enabled: false
+          sql:
+            connectionPools:
+              default:
+                default: true
+                jdbcUrl: jdbc:mysql://mysql:3306/front50?useSSL=false&useUnicode=true&characterEncoding=utf8
+                password: encrypted:k8s!n:spin-secrets!k:mysqlF50Password
+                user: front50_service
+            enabled: true
+            migration:
+              jdbcUrl: jdbc:mysql://mysql:3306/front50?useSSL=false&useUnicode=true&characterEncoding=utf8
+              password: encrypted:k8s!n:spin-secrets!k:mysqlF50MigratePassword
+              user: front50_migrate
+        gate: {}
+        igor: {}
+        orca:
+          executionRepository:
+            redis:
+              enabled: false
+            sql:
+              enabled: true
+          monitor:
+            activeExecutions:
+              redis: false
+          sql:
+            connectionPool:
+              connectionTimeout: 5000
+              jdbcUrl: jdbc:mysql://mysql:3306/orca?useSSL=false&useUnicode=true&characterEncoding=utf8
+              maxLifetime: 30000
+              maxPoolSize: 50
+              password: encrypted:k8s!n:spin-secrets!k:mysqlOrcaPassword
+              user: orca_service
+            enabled: true
+            migration:
+              jdbcUrl: jdbc:mysql://mysql:3306/orca?useSSL=false&useUnicode=true&characterEncoding=utf8
+              password: encrypted:k8s!n:spin-secrets!k:mysqlOrcaMigratePassword
+              user: orca_migrate
+        rosco: {}
+        settings-local.js: {}
+        spinnaker: {}
+        spinnakerconfig: {}
+      service-settings:
+        clouddriver:
+          kubernetes:
+            serviceAccountName: spin-sa
+        echo: {}
+        front50: {}
+        gate: {}
+        igor: {}
+        orca: {}
+        rosco: {}
+        spinnaker: {}
+    validation:
+      providers:
+        kubernetes:
+          enabled: true
+  status:
+    apiUrl: http://af6c0aa30b9d4451696f09f20efd9397-541123012.us-east-2.elb.amazonaws.com:8084
+    lastDeployed:
+      config:
+        hash: 06b225ce099d0756e274947da5a9890b
+        lastUpdatedAt: "2021-06-09T06:37:36Z"
+      kustomize:
+        hash: ff41b48bd90c76b993a3ff6ef95c5feb
+        lastUpdatedAt: "2021-06-09T06:37:36Z"
+    serviceCount: 8
+    services:
+    - image: docker.io/armory/clouddriver:2.26.6
+      name: spin-clouddriver
+      readyReplicas: 1
+      replicas: 1
+    - image: docker.io/armory/deck:2.26.5
+      name: spin-deck
+      readyReplicas: 1
+      replicas: 1
+    - image: docker.io/armory/echo:2.26.5
+      name: spin-echo
+      readyReplicas: 1
+      replicas: 1
+    - image: docker.io/armory/front50:2.26.7
+      name: spin-front50
+      readyReplicas: 1
+      replicas: 1
+    - image: docker.io/armory/gate:2.26.5
+      name: spin-gate
+      readyReplicas: 1
+      replicas: 1
+    - image: docker.io/armory/orca:2.26.12
+      name: spin-orca
+      readyReplicas: 1
+      replicas: 1
+    - image: us-docker.pkg.dev/spinnaker-community/redis/redis-cluster:v2
+      name: spin-redis
+      readyReplicas: 1
+      replicas: 1
+    - image: docker.io/armory/rosco:2.26.8
+      name: spin-rosco
+      readyReplicas: 1
+      replicas: 1
+    status: OK
+    uiUrl: http://ae7f791f17a0e47bfaa50c4ca2029337-1819689678.us-east-2.elb.amazonaws.com:9000
+    version: 2.26.0
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"labels":{"app":"minio"},"name":"minio-pvc","namespace":"spinnaker"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1Gi"}}}}
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/aws-ebs
+      volume.kubernetes.io/selected-node: ip-10-0-11-67.us-east-2.compute.internal
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app: minio
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+        f:spec:
+          f:accessModes: {}
+          f:resources:
+            f:requests:
+              .: {}
+              f:storage: {}
+          f:volumeMode: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:volume.kubernetes.io/selected-node: {}
+      manager: kube-scheduler
+      operation: Update
+      time: "2021-06-08T23:11:29Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:pv.kubernetes.io/bind-completed: {}
+            f:pv.kubernetes.io/bound-by-controller: {}
+            f:volume.beta.kubernetes.io/storage-provisioner: {}
+        f:spec:
+          f:volumeName: {}
+        f:status:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-06-08T23:11:35Z"
+    name: minio-pvc
+    namespace: spinnaker
+    resourceVersion: "1818663"
+    selfLink: /api/v1/namespaces/spinnaker/persistentvolumeclaims/minio-pvc
+    uid: b2f333ae-e210-4535-a354-b3bf6b4c1e36
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: gp2
+    volumeMode: Filesystem
+    volumeName: pvc-b2f333ae-e210-4535-a354-b3bf6b4c1e36
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"name":"mysql-pvc","namespace":"spinnaker"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"2Gi"}}}}
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: kubernetes.io/aws-ebs
+      volume.kubernetes.io/selected-node: ip-10-0-52-37.us-east-2.compute.internal
+    creationTimestamp: "2021-06-08T23:11:27Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          f:accessModes: {}
+          f:resources:
+            f:requests:
+              .: {}
+              f:storage: {}
+          f:volumeMode: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-06-08T23:11:27Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:volume.kubernetes.io/selected-node: {}
+      manager: kube-scheduler
+      operation: Update
+      time: "2021-06-08T23:11:29Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:pv.kubernetes.io/bind-completed: {}
+            f:pv.kubernetes.io/bound-by-controller: {}
+            f:volume.beta.kubernetes.io/storage-provisioner: {}
+        f:spec:
+          f:volumeName: {}
+        f:status:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-06-08T23:11:35Z"
+    name: mysql-pvc
+    namespace: spinnaker
+    resourceVersion: "1818668"
+    selfLink: /api/v1/namespaces/spinnaker/persistentvolumeclaims/mysql-pvc
+    uid: a4ebaaeb-9be9-4008-892d-df1ef64cbfa0
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 2Gi
+    storageClassName: gp2
+    volumeMode: Filesystem
+    volumeName: pvc-a4ebaaeb-9be9-4008-892d-df1ef64cbfa0
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 2Gi
+    phase: Bound
+kind: List
+metadata: {}

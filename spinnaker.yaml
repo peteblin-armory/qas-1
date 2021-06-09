@@ -196,7 +196,10 @@ spec:
     rosco: {}
   spinnakerConfig:
     config:
-      armory: {}
+      armory: 
+        diagnostics:
+          enabled: true
+          uuid: awsquickstart-6f8cfe5a-bf12-11eb-a9cf-6b794c37bb4c
       artifacts: {}
       canary: {}
       ci: {}

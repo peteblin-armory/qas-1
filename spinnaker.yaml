@@ -280,7 +280,7 @@ spec:
       igor: {}
       orca: {}
       rosco: {}
-      settings-local.js: 
+      settings-local.js: |
         window.spinnakerSettings.kubernetesAdHocInfraWritesEnabled = true;
       spinnaker: {}
       spinnakerconfig: {}

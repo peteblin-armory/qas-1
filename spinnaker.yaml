@@ -15,10 +15,35 @@ metadata:
   name: spin-cluster-role
 rules:
 - apiGroups:
+  - "extensions"
+  resources:
+  - ingresses
+  - ingresses/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - "networking.k8s.io"
+  resources:
+  - ingresses
+  - ingresses/status
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
   - ""
   resources:
   - pods
-  - ingresses/status
   - endpoints
   verbs:
   - get
@@ -37,7 +62,6 @@ rules:
   - configmaps
   - secrets
   - namespaces
-  - ingresses
   - jobs
   verbs:
   - create
@@ -102,18 +126,23 @@ rules:
   verbs:
   - '*'
 ---
-apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: spin-sa
+---
 kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: spin-cluster-role-binding
+subjects:
+  - kind: ServiceAccount
+    name: spin-sa
+    namespace: spinnaker
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: spin-cluster-role
-subjects:
-- kind: ServiceAccount
-  name: spin-sa
-  namespace: spinnaker
 ---
 apiVersion: v1
 kind: Service
@@ -242,7 +271,7 @@ spec:
       repository: {}
       security: {}
       spinnaker: {}
-      version: 2.25.0
+      version: 2.26.0
     profiles:
       clouddriver: {}
       echo: {}
@@ -251,7 +280,8 @@ spec:
       igor: {}
       orca: {}
       rosco: {}
-      settings-local.js: {}
+      settings-local.js: 
+        window.spinnakerSettings.kubernetesAdHocInfraWritesEnabled = true;
       spinnaker: {}
       spinnakerconfig: {}
     service-settings:

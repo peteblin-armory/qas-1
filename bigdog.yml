@@ -521,7 +521,7 @@ items:
           - mkdir -p /storage/spinnaker && /usr/bin/minio server /storage
           env:
           - name: MINIO_ACCESS_KEY
-            value: minio
+            value: my-minio
           - name: MINIO_SECRET_KEY
             valueFrom:
               secretKeyRef:
